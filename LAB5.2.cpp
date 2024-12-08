@@ -2,41 +2,52 @@
 #include <string_view>
 #include <cassert>
 
-std::string_view secondWord(std::string_view str) {
-    size_t firstSpace = str.find(' ');
-    if (firstSpace == std::string_view::npos) {
-        return "";
+size_t findSpace(std::string_view string)
+{
+    for (size_t i = 0; i < string.length(); i++)
+    {
+        if (string[i] == ' ')
+        {
+            return i;
+        }
     }
-
-    size_t start = str.find_first_not_of(' ', firstSpace + 1);
-    if (start == std::string_view::npos) {
-        return "";
-    }
-
-    size_t end = str.find(' ', start);
-    return str.substr(start, end - start);
+    return size_t(-1);
 }
 
-void runTests() {
+std::string_view secondWord(std::string_view str)
+{
+    {
+        size_t index = findSpace(str);
+        if (index == size_t(-1))
+            return "";
+        str = str.substr(index + 1);
+    }
+
+    {
+        size_t index = findSpace(str);
+        if (index == size_t(-1))
+            return str;
+        str = { &str[0], index };
+    }
+
+    return str;
+}
+
+void runTests() 
+{
     assert(secondWord("Hello world") == "world");
-    assert(secondWord("Hello my dear") == "my");
-    assert(secondWord("") == "");
-    assert(secondWord(" ") == "");
-    assert(secondWord(" a ") == "a");
-    assert(secondWord("a  ") == "");
-    assert(secondWord("a  b") == "");
-    assert(secondWord("hello     world    dear") == "");
-
-    assert(secondWord("first second") == "second");
-    assert(secondWord("first    second    third") == "second");
-    assert(secondWord("   leadspace") == "");
-    assert(secondWord("leadspace     second") == "second");
-    assert(secondWord("word") == "");
-
-    std::cout << "All tests passed!" << std::endl;
+	assert(secondWord("Hello my dear") == "my");
+	assert(secondWord("") == "");
+	assert(secondWord(" ") == "");
+	assert(secondWord(" a ") == "a");
+	assert(secondWord("a  ") == "");
+	assert(secondWord("a  b") == "");
+	assert(secondWord("hello     world    dear") == "");
+    std::cout << "All tests passed successfully!" << std::endl;
 }
 
-int main() {
+int main()
+{
     runTests();
     return 0;
 }

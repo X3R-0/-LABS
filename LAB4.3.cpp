@@ -3,13 +3,13 @@
 #include <cassert>
 
 void productWithInfiniteLoop(std::span<int> inputOutput, std::span<int> coefficients) {
-    // Убедимся, что длины массивов одинаковы
+    
     assert(inputOutput.size() == coefficients.size());
 
     int index = 0;
     while (true) {
         if (index >= inputOutput.size()) {
-            break; // Завершение бесконечного цикла вручную
+            break;
         }
         inputOutput[index] *= coefficients[index];
         ++index;
@@ -17,7 +17,7 @@ void productWithInfiniteLoop(std::span<int> inputOutput, std::span<int> coeffici
 }
 
 void productWithWhileLoop(std::span<int> inputOutput, std::span<int> coefficients) {
-    // Убедимся, что длины массивов одинаковы
+   
     assert(inputOutput.size() == coefficients.size());
 
     int index = 0;
@@ -28,7 +28,7 @@ void productWithWhileLoop(std::span<int> inputOutput, std::span<int> coefficient
 }
 
 void productWithForLoop(std::span<int> inputOutput, std::span<int> coefficients) {
-    // Убедимся, что длины массивов одинаковы
+   
     assert(inputOutput.size() == coefficients.size());
 
     for (size_t index = 0; index < inputOutput.size(); ++index) {
