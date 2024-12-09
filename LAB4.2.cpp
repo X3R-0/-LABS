@@ -18,16 +18,18 @@ int main() {
     std::cout << "Oranges: ";
     std::cin >> fruits.oranges;
 
+    bool finalCondition = false;
+
     {
         bool applesCondition = fruits.apples > 5;
         bool pearsCondition = fruits.pears < 8;
         bool orangesCondition = fruits.oranges == 2 * fruits.apples;
 
-        bool finalCondition = applesCondition && pearsCondition && orangesCondition;
+        finalCondition = applesCondition && pearsCondition && orangesCondition;
+    }
 
-        if (finalCondition) {
-            std::cout << "Hello" << std::endl;
-        }
+    if (finalCondition) {
+        std::cout << "Hello" << std::endl;
     }
 
     return 0;
